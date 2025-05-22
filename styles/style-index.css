@@ -1,0 +1,103 @@
+ body{
+            background-image: url('../img/fondpoint.png');
+            background-attachment:fixed;
+        }
+
+        .title {
+
+            margin: 20px;
+            font-size: 2.7rem;
+        }
+        .carousel {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 80%;
+            margin: auto;
+            height: 100vh;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+            border-radius: 10px;
+        }
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .carousel button:hover {
+            background: rgba(31, 231, 13, 0.5);
+        }
+        #prev {
+            left: 20px;
+        }
+        #next {
+            right: 20px;
+        }
+        .comment {
+            transition: all 0.3s ease;
+        }
+        .comment:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .first {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../img/best.JPG');
+            background-size: cover;
+            background-position: center;
+            margin-top: -100px;
+        }
+
+        h2{
+                font-family: "Playwrite HU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+            
+        
+
+        .calltoreserve {
+            background:url('../img/banniereverte.webp');
+            background-size: cover;
+            background-position: center;
+        }
+        .calltotarifs {
+            background-color:transparent;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .calltoaction{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+        }
+
+        .btn{background-color:rgb(19, 150, 14);}
+
+
+        @media screen and (max-width: 760px) {
+
+            .calltoaction {
+
+                flex-direction: column;
+            }
+
+            .title {
+
+            margin: 20px;
+            font-size: 2rem;
+        }
+    
+}

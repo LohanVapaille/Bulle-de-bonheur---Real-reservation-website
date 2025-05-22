@@ -1,0 +1,115 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+header {
+    
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%;
+    
+
+
+}
+
+
+.menu .navbar a::after, .menu ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+}
+.menu ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 100px;
+}
+.menu ul li {
+    display: inline;
+}
+.menu ul li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+
+
+.boutons-bg {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 50px;
+    width: 50px;
+    color: #ffffff;
+}
+
+.menu-bg{
+    display: none;
+background-color: rgb(22 163 74);
+width: 100vw;
+position: relative;
+
+}
+.back {
+  position: absolute;
+  z-index: 100;
+  top: 0px;
+  left: 20px;
+  
+  cursor: pointer;
+}
+.menu-bg ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    
+    position: relative;
+    
+}
+
+@media screen and (max-width: 768px) {
+    .menu{
+        display: none;
+    }
+    header{
+        justify-content: left;
+        background-color: rgb(22 163 74);
+        padding: 0;
+        position: relative;
+        margin-bottom: 20px;
+        height: 150px;
+        
+    }
+
+    .boutons-bg{
+        display: flex;
+    }
+}

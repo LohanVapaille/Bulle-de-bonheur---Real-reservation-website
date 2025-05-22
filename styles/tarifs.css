@@ -1,0 +1,118 @@
+header{
+    background-color:rgb(22 163 74);
+}
+
+*,*::before,*::after {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h2{
+
+  font-family: "Playwrite HU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+.blog-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 40px;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.blog-section:nth-child(even) {
+
+ 
+  background: #e7fced;
+}
+.blog-section:nth-child(odd) {
+ background: #bcf8ac;
+  flex-direction: row-reverse;
+}
+.blog-text {
+  flex: 1;
+  min-width: 300px;
+}
+.blog-text h2 {
+  margin-bottom: 15px;
+  color: rgb(22 163 74);
+  font-size: 1.2em;
+}
+
+.blog-section:nth-child(even) h2 {
+margin-bottom: 15px;
+  color: rgb(22 163 74);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.blog-section:nth-child(odd) h2 {
+margin-bottom: 15px;
+  color:#444;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+.blog-text p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #444;
+}
+.blog-text a {
+  line-height: 1.6;
+  color: #444;
+  transition: all 0.3s ease;
+}
+.blog-text a:hover {
+  line-height: 1.6;
+  color: #0421c4;
+}
+.blog-text a:visited {
+  color: purple;
+}
+.blog-img {
+  flex: 1;
+  min-width: 300px;
+}
+.blog-img img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+@media screen and (max-width: 768px) {
+  .blog-section {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      gap: 30px;
+ }
+  .blog-text, .blog-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px;
+      min-width: 100%;
+ }
+  .blog-text {
+      flex-direction: column;
+ }
+  .blog-img img .blog-text p {
+      margin-right: 50px;
+ }
+  .blog-text h2 {
+      font-size: 1.5em;
+ }
+  .blog-text p {
+      font-size: 1em;
+ }
+}
