@@ -6,12 +6,51 @@
     animation: fadeInUp 0.8s ease-out forwards;
   }
   
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp-invers {
+  opacity: 0;
+  transform: translateY(20px); /* changement ici */
+  animation: fadeInUp-invers 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp-invers {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* mouvement vers le haut */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.fadeOutUp {
+  animation: fadeOutUp 0.5s ease-in forwards;
+}
+
+
 
   /* fadeinup au scroll grace au js */
   

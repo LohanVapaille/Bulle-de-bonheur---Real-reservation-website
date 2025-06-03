@@ -41,6 +41,7 @@ h2{
 .blog-text {
   flex: 1;
   min-width: 300px;
+   margin-left: 5px;
 }
 .blog-text h2 {
   margin-bottom: 15px;
@@ -73,7 +74,7 @@ margin-bottom: 15px;
 }
 .blog-text a:hover {
   line-height: 1.6;
-  color: #0421c4;
+  color: #a8b4f3;
 }
 .blog-text a:visited {
   color: purple;
@@ -87,6 +88,38 @@ margin-bottom: 15px;
   max-width: 500px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin:auto;
+}
+.map{
+  display: flex;
+margin-top: 10px;
+}
+.blog-text .lieu{
+  
+  padding: 15px;
+  background-color: rgb(15, 125, 214);
+  border-radius:10px;
+  color:white;
+  margin: auto;
+}
+
+.blog-text .lieu:hover{
+  
+
+  background-color: rgb(26, 72, 109);
+
+}
+
+.blog-text .lieu:visited{
+
+  color:white
+}
+
+#tarifs:target {
+  background-color: rgba(231, 231, 9, 0.2); /* Surlignage */
+  transition: background-color 2s ease;
+  padding: 5px;
+  border-radius: 10px;
 }
 @media screen and (max-width: 768px) {
   .blog-section {

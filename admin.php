@@ -1,6 +1,15 @@
 <?php
 session_start();
-require 'config.php'; // Connexion BDD
+require 'config.php';
+
+// Suppression de demande (AVANT TOUT HTML)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_message'])) {
+    $id = (int) $_POST['id_message'];
+    $stmt = $pdo->prepare('DELETE FROM demandes WHERE id_message = ?');
+    $stmt->execute([$id]);
+    header('Location: admin.php');
+    exit;
+}
 
 // Déconnexion
 if (isset($_GET['logout'])) {
@@ -22,8 +31,7 @@ if (isset($_POST['password'])) {
 
 // Si connecté en admin
 if (!empty($_SESSION['admin'])) {
-
-    // Suppression
+    // Suppression créneau
     if (isset($_GET['delete'])) {
         $stmt = $pdo->prepare("DELETE FROM crenaux WHERE id_crenaux = ?");
         $stmt->execute([$_GET['delete']]);
@@ -55,48 +63,32 @@ if (!empty($_SESSION['admin'])) {
 
     // Récupération des créneaux
     $crenaux = $pdo->query("SELECT * FROM crenaux ORDER BY jour, heure_debut")->fetchAll();
+
+    // Récupération des réservations
+    $sql = "SELECT 
+                d.id_message,
+                d.nom,
+                d.tel,
+                d.text,
+                d.id_crenau,
+                c.jour,
+                c.heure_debut,
+                c.heure_fin
+            FROM demandes d
+            JOIN crenaux c ON d.id_crenau = c.id_crenaux
+            ORDER BY c.jour ASC, c.heure_debut ASC";
+    $reservations = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 
-<?php
-
-
-// Requête pour récupérer toutes les réservations avec info créneau
-$sql = "SELECT 
-            d.id_message,
-            d.nom,
-            d.tel,
-            d.text,
-            d.id_crenau,
-            c.jour,
-            c.heure_debut,
-            c.heure_fin
-        FROM demandes d
-        JOIN crenaux c ON d.id_crenau = c.id_crenaux
-        ORDER BY c.jour ASC, c.heure_debut ASC";
-
-$reservations = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_message'])) {
-    $id = (int) $_POST['id_message'];
-
-    // Connexion à la BDD
-    require 'config.php'; // fichier de connexion PDO
-
-    $stmt = $pdo->prepare('DELETE FROM demandes WHERE id_message = ?');
-    $stmt->execute([$id]);
-
-    // Rediriger vers la page des réservations
-    header('Location: admin.php'); // à adapter si le nom est différent
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Privé | Bulle de Bonheur</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="img/logobdb.png" type="image/x-icon">
     <link rel="stylesheet" href="always/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -202,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_message'])) {
     </style>
 </head>
 <body class="min-h-screen">
-<?php include 'always/header.html'; ?>
+<?php include 'always/header.php'; ?>
 
     <div class="container mx-auto px-4 py-8">
         <?php if (empty($_SESSION['admin'])): ?>

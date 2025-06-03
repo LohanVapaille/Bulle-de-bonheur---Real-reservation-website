@@ -1,0 +1,88 @@
+
+
+*,*::before,*::after {
+    box-sizing: border-box;
+}
+
+body {
+    
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    background-image: url('../img/fondpoint.png');
+    
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #333;
+    max-width: 100%;
+    
+}
+
+header{
+    background-color:rgb(22 163 74);
+}
+.content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    section {
+      position: relative;
+      padding: 40px;
+      background: #fff;
+      border-radius: 20px;
+      margin: 20px 20px;
+      box-shadow: #222 0px 0px 20px;
+      width: 800px;
+    }
+
+
+    .logo-container{
+      position: absolute;
+      width: 75px;
+      height: 75px;
+      top: 10px;
+      right: 35px;
+    }
+
+    h1, h2 {
+      color: #222;
+      font-optical-sizing: auto;
+      font-weight: 800;
+      font-style: normal;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+
+ 
+
+    @media screen and (max-width: 768px) {
+
+      body {
+        font-size: 0.8rem;
+        background-attachment: fixed;
+      }
+      section {
+        margin: 20px;
+        padding: 20px;
+        font-size: 0.8rem;
+        width: auto;
+        min-width: 90%;
+      }
+      .logo-container{
+        display: none;
+      }
+      
+    }

@@ -1,9 +1,15 @@
 <?php
 require 'config.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
 if (isset($_GET['id'])) {
     $id_creneau = $_GET['id'];
-    // Tu peux maintenant utiliser $id_creneau comme tu veux
+   
 }
 
     // Récupération des joueurs ajoutés par les users
@@ -38,22 +44,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tel = trim($_POST['tel']);
     $text = trim($_POST['text']);
 
-    // Simple validation (tu peux l'améliorer)
     if ($id_creneau > 0 && $nom !== '' && $tel !== '' && $text !== '') {
-
-        // Préparation et exécution de la requête d'insertion
         $stmt = $pdo->prepare("INSERT INTO demandes (id_crenau, nom, tel, text) VALUES (?, ?, ?, ?)");
         $success = $stmt->execute([$id_creneau, $nom, $tel, $text]);
 
         if ($success) {
-            echo "<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const popup = document.getElementById('popup-success');
-            if (popup) {
-                popup.classList.remove('hidden');
-            }
-        });
-    </script>";
+
+
+            $mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'bulledebonheur.org';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'contact@bulledebonheur.org';
+    $mail->Password   = 'LohanQuentin77';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // 'ssl'
+    $mail->Port       = 465;
+
+    $mail->setFrom('contact@bulledebonheur.org', 'Bulle de bonheur');
+    $mail->addAddress('bulledebonheurchauffry@gmail.com');  //bulledebonheurchauffry@gmail.com
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Une nouvelle demande a ete enregistree';
+    $mail->Body    = '
+    <h3>Message reçu</h3>
+    Une personne a demandé un créneau sur la plage horaire ' . $detail['heure_debut'] . 'h à ' . $detail['heure_fin'] . 'h prévue le ' . $dateFormatee . '<br><br>
+    <p><strong>Nom:</strong> ' . htmlspecialchars($nom) . '</p>
+    <p><strong>Tel:</strong> ' . htmlspecialchars($tel) . '</p>
+    <p><strong>Message:</strong><br>' . htmlspecialchars($text) . '</p><br>
+    <p>Tu peux tout de même te rendre sur le panel admin <a href="https://bulledebonheur.org/admin.php">en cliquant ici</a></p>
+';
+
+
+    $mail->send();
+    echo "<script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const popup = document.getElementById('popup-success');
+                    if (popup) {
+                        popup.classList.remove('hidden');
+                    }
+                });
+            </script>";
+} catch (Exception $e) {
+    echo "<p>Erreur lors de l'envoi du mail : " . $mail->ErrorInfo . "</p>";
+}
+
         } else {
             echo "<p>Erreur lors de l'enregistrement.</p>";
         }
@@ -62,6 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p>Veuillez remplir tous les champs correctement.</p>";
     }
 }
+
+
 ?>
 
 
@@ -69,15 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Vous avez choisi une plage horaire ? Indiquez-nous maintenant via le formulaire le créneau souhaité, en respectant cette plage. Envie de détente à la campagne ? Profitez d’un moment de relaxation avec jacuzzi, jardin, terrain de pétanque, badminton et tennis de table à Chauffry.">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserver | Bulle de Bonheur</title>
-    <link rel="stylesheet" href="always/header.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Titan+One&display=swap" rel="stylesheet">
+    <title><?php echo $dateFormatee?> | Bulle de Bonheur</title>
+    <?php include 'always/head.html'; ?>
     <link rel="stylesheet" href="styles/styles_crenaux.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         .section{
@@ -91,12 +128,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .submit{
             background-color:#c7f8b0;
+            transition: transform 0.3s ease;
         }
+
+        .submit:hover{
+            background-color:#c7f8b0;
+            transform : scale(1.03)
+        }
+
     </style>
 </head>
 
 <body>
-<?php include 'always/header.html'; ?>
+<?php include 'always/header.php'; ?>
 <div class='success hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4' id="popup-success">
     <strong class="font-bold">Succès !</strong>
     <span class="block sm:inline">Votre demande a bien été enregistrée. Attention : Une demande n'est pas synonyme de réservation. Attendez une confirmation de notre part pour pouvoir ensuite passer à l'étape de paiment.</span>
@@ -113,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <p class="text-gray-700">
                         Une plage horaire est disponible de <?php echo $detail['heure_debut']?>h à <?php echo $detail['heure_fin']?>h. 
-                        Sachez que vous pouvez réserver pour une durée maximum de 4 heures d'affilée.
+                        Sachez que vous pouvez réserver pour une durée de 3 heures maximum. au-delà, sur devis
                     </p>
                 </div>
                 
@@ -122,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class="fas fa-info-circle text-green-600 text-xl"></i>
                     </div>
                     <p class="text-gray-700">
-                        Si vous souhaitez réserver un créneau sur cette plage horaire, remplissez le formulaire et nous vous répondrons dans les plus brefs délais.
+                        Si vous souhaitez réserver un créneau sur cette plage horaire, remplissez le formulaire et nous vous répondrons <strong>par SMS</strong> dans les plus brefs délais.
                     </p>
                 </div>
                 <div class="flex items-center">
@@ -130,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class="fas fa-warning text-red-600 text-xl"></i>
                     </div>
                     <p class="text-gray-700">
-                        Veuillez respecter les <a href="#">conditions générales d'utilisation</a>. En cas de non-respect, l'accès au site vous sera restreint (politesse, respect, pas de spam,...)
+                        Veuillez prendre connaissance des <a class='underline text-green-600' href="cga.php">modalités de paiement et d’annulation</a> et respecter les <a class='underline text-green-600' href="cgu.php">conditions générales d'utilisation</a>. En cas de non-respect, l'accès au site vous sera restreint (politesse, respect, pas de spam,...)
                     </p>
                 </div>
             </div>
@@ -163,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div>
-                    <label for="text" class="block text-sm font-medium text-gray-700 mb-1">En respectant la plage horaire donnée, veuillez préciser le créneau souhaité (4 heures max)</label>
+                    <label for="text" class="block text-sm font-medium text-gray-700 mb-1">En respectant la plage horaire donnée, <strong>veuillez préciser le créneau souhaité</strong> (3 heures max)</label>
                     <div class="relative">
                         <div class="absolute top-3 left-3">
                             <i class="fas fa-comment-dots text-gray-400"></i>

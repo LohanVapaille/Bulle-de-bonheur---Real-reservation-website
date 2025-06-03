@@ -1,7 +1,26 @@
 <?php
 require_once 'config.php';
 
-$stmt = $pdo->query("SELECT * FROM crenaux");
+// Obtenir la date d'aujourd'hui
+$aujourdhui = date('Y-m-d');
+
+$stmt = $pdo->prepare("
+    DELETE FROM demandes 
+    WHERE id_crenau IN (
+        SELECT id_temp FROM (
+            SELECT id_crenaux AS id_temp FROM crenaux WHERE jour < :aujourdhui
+        ) AS temp
+    )
+");
+
+$stmt->execute(['aujourdhui' => $aujourdhui]);
+
+// 2. Supprimer les créneaux passés
+$stmt = $pdo->prepare("DELETE FROM crenaux WHERE jour < :aujourdhui");
+$stmt->execute(['aujourdhui' => $aujourdhui]);
+
+
+$stmt = $pdo->query("SELECT * FROM crenaux ORDER BY jour, heure_debut");
 $crenaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -13,28 +32,26 @@ $crenaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Les plages horaires actuellement disponibles sont renseignées sur cette page. Vous pouvez les consulter et demander un créneau selon vos envies. Envie de détente à la campagne ? Profitez d’un moment de relaxation avec jacuzzi, jardin, terrain de pétanque, badminton et tennis de table à Chauffry.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserver | Bulle de Bonheur</title>
-    <link rel="stylesheet" href="always/header.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Titan+One&display=swap" rel="stylesheet">
+    <title>Réserver | Bulle de Bonheur</title>
+<?php include 'always/head.html'; ?>
     <link rel="stylesheet" href="styles/styles_crenaux.css">
     <link rel="stylesheet" href="always/styles_crenaux.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body>
-<?php include 'always/header.html'; ?>
+<?php include 'always/header.php'; ?>
 
   <div class="boutons">
-    <button class="filtre reset" onclick="resetFiltres(this)">Sans filtres</button>
-    <button class="filtre dispo" onclick="filtrerDisponibles(this)">Disponibles</button>
+    
     <button class="filtre day" onclick="filtrerAujourdhui(this)">Aujourd'hui</button>
     <button class="filtre week" onclick="filtrerSemaine(this)">Cette semaine</button>
     <button class="filtre mois" onclick="filtrerMois(this)">Ce mois-ci</button>
+    <button class="filtre dispo" onclick="filtrerDisponibles(this)">Disponibles</button>
+    <button class="filtre reset" onclick="resetFiltres(this)">Sans filtres</button>
 
 
 
@@ -89,9 +106,7 @@ $crenaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?= htmlspecialchars($creneau['heure_fin']) ?>h</p>
                 </div>
 
-            <div class='right'>
-                <p> <?= htmlspecialchars($creneau['heure_debut']) ?>h</p>
-            </div></div>
+           </div>
 
     <?php if ($creneau['etat'] === 'dispo'): ?>
         <div class='good reserve'data-id="<?php echo $creneau['id_crenaux']?>">
@@ -170,16 +185,28 @@ function filtrerAujourdhui(btn) {
 function filtrerSemaine(btn) {
     activerBouton(btn);
     const now = new Date();
+
+    // Ajuster pour que la semaine commence le lundi
+    const jourActuel = now.getDay(); // 0 (dimanche) à 6 (samedi)
+    const decalageLundi = jourActuel === 0 ? -6 : 1 - jourActuel;
+
     const debutSemaine = new Date(now);
-    debutSemaine.setDate(now.getDate() - now.getDay());
+    debutSemaine.setDate(now.getDate() + decalageLundi);
+
     const finSemaine = new Date(debutSemaine);
     finSemaine.setDate(debutSemaine.getDate() + 6);
 
+    // Formater en YYYY-MM-DD
+    const formatDate = d => d.toISOString().split('T')[0];
+    const debut = formatDate(debutSemaine);
+    const fin = formatDate(finSemaine);
+
     document.querySelectorAll('.onecreneau').forEach(item => {
-        const jour = new Date(item.dataset.jour);
-        item.style.display = (jour >= debutSemaine && jour <= finSemaine) ? '' : 'none';
+        const jour = item.dataset.jour;
+        item.style.display = (jour >= debut && jour <= fin) ? '' : 'none';
     });
 }
+
 
 
 function filtrerMois(btn) {

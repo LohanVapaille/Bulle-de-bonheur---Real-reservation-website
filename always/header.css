@@ -22,11 +22,12 @@ header {
     padding-right: 20px;
     padding-left: 20px;
     width: 100%;
-    
-
 
 }
 
+.logo{
+    width: 100px;
+}
 
 .menu .navbar a::after, .menu ul li a::after {
     content: "";
@@ -42,6 +43,8 @@ header {
 .menu {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    
 }
 .menu ul {
     list-style: none;
@@ -61,39 +64,80 @@ header {
 
 
 
-.boutons-bg {
+.btn-bg {
     display: none;
-    flex-direction: column;
-    gap: 4px;
+    
     margin-left: 50px;
     width: 50px;
     color: #ffffff;
 }
 
+.barres{
+
+font-size: xx-large;
+}
+
+.back a{
+
+    color: rgb(253, 154, 154);
+}
+
 .menu-bg{
     display: none;
-background-color: rgb(22 163 74);
-width: 100vw;
-position: relative;
+    z-index: 10000;
+    position: absolute;
+    top: 0;
+    left: 0;
 
-}
-.back {
-  position: absolute;
-  z-index: 100;
-  top: 0px;
-  left: 20px;
-  
-  cursor: pointer;
+width: 100vw;
+height: auto;
+
+text-align: center;
 }
 .menu-bg ul{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    
-    position: relative;
+width: 100%;
+}
+
+.menu-bg li{
+    background-color: rgba(6, 8, 7, 0.8);
+    width: 100%;
     
 }
+
+.menu-bg li a {
+font-weight: 700;
+width: 100%;
+display: block;
+padding-top: 15px;
+    padding-bottom: 15px;
+
+
+}
+.logo{
+
+    display: flex;
+    justify-content: right;
+    
+}
+
+.logo img{
+
+    width: 50px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+}
+
+.menu .active{
+
+    font-weight: bold;
+}
+
+.menu-bg .active a{
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    text-shadow: none;
+}
+
 
 @media screen and (max-width: 768px) {
     .menu{
@@ -101,15 +145,39 @@ position: relative;
     }
     header{
         justify-content: left;
-        background-color: rgb(22 163 74);
+        
         padding: 0;
         position: relative;
-        margin-bottom: 20px;
-        height: 150px;
+        
+        height: 100px;
         
     }
 
-    .boutons-bg{
-        display: flex;
+    .btn-bg{
+        display: block;
     }
+
+    footer img{
+
+    display: none;
+}
+}
+
+.mail{
+
+    font-size: 0.8rem;
+}
+
+#footer:target {
+  background-color: rgba(231, 231, 9, 0.4); /* Surlignage */
+  transition: background-color 2s ease;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+footer img{
+
+    width: 70px;
+    margin: auto;
+    margin-top: 20px;
 }

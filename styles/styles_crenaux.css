@@ -71,7 +71,7 @@ header{
 .onecreneau .horaire{
 
   display: flex;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   
 }
 .onecreneau .left{
@@ -84,18 +84,6 @@ header{
   color: green;
   font-weight: 700;
   font-size: 1.4rem;
-}
-.onecreneau .right{
-
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  color: rgb(19, 150, 14);
-    color: green;
-  font-weight: 200;
-  font-size: 1.5rem;
-  
-  padding: 10px;
 }
 
 .onecreneau .reserve{

@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulle de bonheur</title>
+    
+
+    <title>Bulle de bonheur | Chauffry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
      <?php include 'always/head.html'; ?>
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles/style-index.css">
    
 </head>
 <body>
-<?php include 'always/header.html'; ?>
+<?php include 'always/header.php'; ?>
 
 
-    <div class='first h-screen flex flex-col justify-center items-center text-center text-white'>
-        <h1 class="title font-bold mb-8">Envie de vous détendre à la campagne ?</h1>
-        <div class='calltoaction'>
+    <div class='first h-screen flex flex-col items-center text-center text-white'>
+        <div class='content'>
+            <h1 class="title font-bold mb='0' ">Envie de vous détendre à la campagne ?</h1>
+        <p class='shadowtext font-bold mr-5 mb-8'>Une bulle de bonheur, rien que pour vous, situé à Chauffry, près de Coulommiers (77)</p>
+        <div class="centrer"><div class='calltoaction'>
             <a href="tarifs.php" class="fadeInUp call bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-            Voir les préstations
+            Voir les prestations
         </a>
         <a href="creneaux.php" class="fadeInUp call bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
             Voir les disponibilités
-        </a></div>
+        </a></div></div></div>
+        <div class="chevron">
+                <i tabindex ='0' class='bx bx-chevrons-down bx-fade-up' ></i>
+        </div>
     </div>
     
 
@@ -30,7 +39,7 @@
         <button id="next" class="btn flex items-center justify-center">›</button>
     </div>
 
-    <div class='call calltoreserve bg-green-600 text-white py-16 px-8 text-center'>
+    <div id='content' class='call calltoreserve bg-green-600 text-white py-16 px-8 text-center'>
         <div class="fade-in-up-on-scroll max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-6">Comment ça marche ?</h2>
             <p class="text-xl mb-4">Demander un créneau en quelques clics !</p>
@@ -86,38 +95,70 @@
     <?php include 'always/footer.html'; ?>
 
     <script>
-        const images = [
-            "img/jardin.JPG",
-            "img/terrasejacuzzi.JPG",
-            "img/kioske.jpg",
-            "img/kioske2.JPG",
-            "img/traction.jpg",
-            "img/pingpong.JPG",
-            "img/jaccuzzihaut.JPG",
-            "img/petanque.JPG"
+const images = [
+    "img/jardin.JPG",
+    "img/terrasejacuzzi.JPG",
+    "img/kioske.jpg",
+    "img/kioske2.JPG",
+    "img/traction.jpg",
+    "img/pingpong.JPG",
+    "img/jaccuzzihaut.JPG",
+    "img/petanque.JPG"
+];
 
-            
-        ];
+let currentIndex = 0;
+const imgElement = document.getElementById("carousel-image");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
-        let currentIndex = 0;
-        const imgElement = document.getElementById("carousel-image");
-        const prevBtn = document.getElementById("prev");
-        const nextBtn = document.getElementById("next");
+function showImage(index) {
+    imgElement.src = images[index];
+    imgElement.alt = `Image ${index + 1}`;
+}
 
-        function showImage(index) {
-            imgElement.src = images[index];
-            imgElement.alt = `Image ${index + 1}`;
-        }
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+}
 
-        prevBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            showImage(currentIndex);
-        });
+// Lance le défilement automatique toutes les 3 secondes
+let interval = setInterval(nextImage, 3000);
 
-        nextBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        });
+// Arrête le défilement auto si l'utilisateur clique
+function stopAutoScroll() {
+    clearInterval(interval);
+}
+
+prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(currentIndex);
+    stopAutoScroll();
+});
+
+nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+    stopAutoScroll();
+});
+
+// Affiche l'image initiale
+showImage(currentIndex);
+
+
+        const chevron = document.querySelector('.chevron');
+
+function scrollToContent() {
+  window.location.href='#content'
+}
+
+chevron.addEventListener('click', scrollToContent);
+
+chevron.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    scrollToContent();
+  }
+});
+
 
     </script>
 </body>
