@@ -30,6 +30,9 @@
         <a href="tarifs.php" class="text-blue-600 hover:underline">🖼️ Prestations / Présentation du jardin</a>
       </li>
       <li>
+        <a href="adresse.php" class="text-blue-600 hover:underline">✉️ Adresse / Contact</a>
+      </li>
+      <li>
         <a href="mentions-legales.php" class="text-blue-600 hover:underline">📄 Mentions légales</a>
       </li>
       <li>
@@ -41,9 +44,7 @@
       <li>
         <a href="sitemap.php" class="text-blue-600 hover:underline">🗺️ Plan du site</a>
       </li>
-      <li>
-        <a href="index.php#footer" class="text-blue-600 hover:underline">✉️ Contact</a>
-      </li>
+      
     </ul>
 
     <p class="mt-8 text-sm text-gray-600">Dernière mise à jour : 23 mai 2025</p>

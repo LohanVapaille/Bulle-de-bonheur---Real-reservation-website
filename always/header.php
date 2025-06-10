@@ -8,7 +8,7 @@ $current = basename($_SERVER['PHP_SELF']); // index.php, creneaux.php, etc.
       <li class="<?= $current === 'index.php' ? 'active' : '' ?>"><a href="index.php">Accueil</a></li>
       <li class="<?= $current === 'creneaux.php' ? 'active' : '' ?>"><a href="creneaux.php">Disponibilités</a></li>
       <li class="<?= $current === 'tarifs.php' ? 'active' : '' ?>"><a href="tarifs.php">Prestations & Tarifs</a></li>
-      <li><a href="#footer">Contact</a></li>
+      <li class="<?= $current === 'adresse.php' ? 'active' : '' ?>"><a href="adresse.php">Adresse & Contact</a></li>
     </ul>
   </nav>
 
@@ -17,15 +17,14 @@ $current = basename($_SERVER['PHP_SELF']); // index.php, creneaux.php, etc.
   </div>
 
   <nav class="menu-bg">
+    <i class='back bx  bx-x' style="animation-delay: 0.1s;"></i>
     <ul>
-      <li class="fadeInUp-invers <?= $current === 'index.php' ? 'active' : '' ?>" style="animation-delay: 0s;"><a href="#"></a></li>
+      
       <li class="fadeInUp-invers <?= $current === 'index.php' ? 'active' : '' ?>" style="animation-delay: 0.1s;"><a href="index.php">Accueil</a></li>
-      <li class="fadeInUp-invers <?= $current === 'creneaux.php' ? 'active' : '' ?>" style="animation-delay: 0.2s;"><a href="creneaux.php">Disponibilités</a></li>
-      <li class="fadeInUp-invers <?= $current === 'tarifs.php' ? 'active' : '' ?>" style="animation-delay: 0.3s;"><a href="tarifs.php">Prestations & Tarifs</a></li>
-      <li class="fadeInUp-invers" style="animation-delay: 0.4s;"><a href="#footer">Lieu</a></li>
-      <li class='fadeInUp-invers'><a href="#footer" style="animation-delay: 0.5s;">Contact</a></li>
-      <li class="fadeInUp-invers back"><a href="#"style="animation-delay: 0.6s;">Fermer le menu</a></li>
-      <li class="fadeInUp-invers logo"><img src="img/logobdb.png" alt=""></li>
+      <li class="fadeInUp-invers <?= $current === 'creneaux.php' ? 'active' : '' ?>" style="animation-delay: 0.1s;"><a href="creneaux.php">Disponibilités</a></li>
+      <li class="fadeInUp-invers <?= $current === 'tarifs.php' ? 'active' : '' ?>" style="animation-delay: 0.1s;"><a href="tarifs.php">Prestations & Tarifs</a></li>
+      <li class="fadeInUp-invers <?= $current === 'adresse.php' ? 'active' : '' ?>" style="animation-delay: 0.1s;"><a href="adresse.php">Adresse & Contact</a></li>
+      
     </ul>
   </nav>
 </header>

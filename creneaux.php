@@ -87,7 +87,7 @@ $crenaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // Mettre la première lettre de chaque mot en majuscule
     $dateFormatee = mb_convert_case($dateFormatee, MB_CASE_TITLE, "UTF-8");
 ?>
-        <div class="onecreneau" data-etat="<?php echo $creneau['etat']?>" data-jour="<?= $creneau['jour'] ?>" >
+        <div class="onecreneau fadeInUp " data-etat="<?php echo $creneau['etat']?>" data-jour="<?= $creneau['jour'] ?>" >
             
             <div class='infos'>
                 <div class='left'>
@@ -232,10 +232,14 @@ function resetFiltres(btn) {
     });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    const boutonReset = document.querySelector('.filtre.reset');
-    resetFiltres(boutonReset);
+document.addEventListener("DOMContentLoaded", () => {
+    const boutonMois = document.querySelector(".filtre.mois");
+    if (boutonMois) {
+        filtrerMois(boutonMois);
+    }
 });
+
+
 
 
 

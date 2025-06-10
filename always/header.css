@@ -62,12 +62,39 @@ header {
     font-size: 1.2rem;
 }
 
+.menu ul li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Soulignement centré animé */
+.menu ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+/* Animation au survol */
+.menu ul li a:hover::after {
+    width: 100%;
+}
+
+
+
 
 
 .btn-bg {
     display: none;
     
-    margin-left: 50px;
+    margin-right: 20px;
     width: 50px;
     color: #ffffff;
 }
@@ -77,29 +104,36 @@ header {
 font-size: xx-large;
 }
 
-.back a{
+.back{
 
-    color: rgb(253, 154, 154);
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 3rem;
 }
 
 .menu-bg{
     display: none;
     z-index: 10000;
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
+    left: 0;    
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(6, 8, 7, 0.9);
+    align-items: center;
+    text-align: center;
+}
 
-width: 100vw;
-height: auto;
-
-text-align: center;
+.menu-bg:hover{
+    cursor: pointer;
 }
 .menu-bg ul{
 width: 100%;
 }
 
 .menu-bg li{
-    background-color: rgba(6, 8, 7, 0.8);
+    
     width: 100%;
     
 }
@@ -144,7 +178,7 @@ padding-top: 15px;
         display: none;
     }
     header{
-        justify-content: left;
+        justify-content: right;
         
         padding: 0;
         position: relative;

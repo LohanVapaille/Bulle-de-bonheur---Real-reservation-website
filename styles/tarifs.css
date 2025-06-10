@@ -43,23 +43,18 @@ h2{
   min-width: 300px;
    margin-left: 5px;
 }
-.blog-text h2 {
-  margin-bottom: 15px;
-  color: rgb(22 163 74);
-  font-size: 1.2em;
-}
 
 .blog-section:nth-child(even) h2 {
 margin-bottom: 15px;
   color: rgb(22 163 74);
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: 700;
 }
 
 .blog-section:nth-child(odd) h2 {
 margin-bottom: 15px;
   color:#444;
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: 700;
 }
 .blog-text p {
@@ -115,11 +110,9 @@ margin-top: 10px;
   color:white
 }
 
-#tarifs:target {
-  background-color: rgba(231, 231, 9, 0.2); /* Surlignage */
-  transition: background-color 2s ease;
-  padding: 5px;
-  border-radius: 10px;
+
+.adresse:nth-child(odd){
+background: #e7fced;
 }
 @media screen and (max-width: 768px) {
   .blog-section {

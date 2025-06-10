@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Envie de vous détendre à la campagne, dans un jacuzzi SPA couvert, accompagné d'un jardin en libre accès ? Une bulle de bonheur, rien que pour vous, situé à Chauffry, près de Coulommiers (Seine et marne 77).">
     
 
     <title>Bulle de bonheur | Chauffry</title>
     <script src="https://cdn.tailwindcss.com"></script>
      <?php include 'always/head.html'; ?>
-     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles/style-index.css">
    
 </head>

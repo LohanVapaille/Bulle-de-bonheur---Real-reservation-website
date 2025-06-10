@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestaion & Tarifs | Bulle de bonheur</title>
+    <title>Prestation & Tarifs | Bulle de bonheur</title>
     <meta name="description" content="Renseignez-vous sur les prestations proposées par Bulle de Bonheur : prix, suppléments, détails et toutes les informations importantes. Envie de vous détendre dans une bulle de bonheur à la campagne ? Profitez d’un moment de relaxation avec jacuzzi, jardin, terrain de pétanque, badminton et tennis de table à Chauffry.">
 
     <?php include 'always/head.html'; ?>
@@ -101,6 +101,23 @@ Sur simple demande (sans supplément) : siège massant et ceinture de massage po
     <div class="blog-text fade-in-up-on-scroll">
       <h2>Vous souhaitez faire un cadeau à un proche ?</h2>
       <p>Il est également possible d’offrir un créneau à un proche en demandant la création d’une <strong>carte cadeau</strong> personnalisée. Il vous suffit d’en faire la demande, et vous pourrez ensuite la lui transmettre. Il pourra <strong>nous contacter pour choisir le créneau de son choix</strong> et profiter de son cadeau .
+
+      
+    </div>
+  </section>
+
+    <section id='adresse'class="blog-section">
+    <div class="blog-img fade-in-up-on-scroll">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20193.82353783792!2d3.1616325425694716!3d48.82313641492287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e8b7dfb6504985%3A0x76ea395a835c978c!2s77169%20Chauffry!5e1!3m2!1sfr!2sfr!4v1749302037725!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="blog-text fade-in-up-on-scroll">
+      <h2>Adresse et contact</h2>
+      <p> Ce petit coin de bonheur <strong>se situe à Chauffry</strong>, à 10 minutes de <strong>Coulommiers</strong> en <strong>Seine & Marne</strong> (77) <br><br>
+    Si vous souhaitez plus de renseignements, n'hésitez pas à nous contacter : <br><br><ul>
+      <li>Email : <a href="mailto:bulledebonheurchauffry@gmail.com" class="">bulledebonheurchauffry@gmail.com</a></li>
+      <li>Tél : <a href="tel:33688168417" class="">+33 6 88 16 84 17</a></li>
+    </ul>  </p>
+
 
       
     </div>
